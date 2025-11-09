@@ -40,8 +40,8 @@ const featuredProducts = [
 
 const FeaturedProducts = () => {
   return (
-    <div className="bg-black text-white py-16 px-10">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto max-w-6xl">
+    <div className="bg-black text-white py-16 px-4 sm:px-6 lg:px-10">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto max-w-6xl">
         {featuredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

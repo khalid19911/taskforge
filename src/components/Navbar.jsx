@@ -32,7 +32,7 @@ const Navbar = () => {
       </ul>
 
       {/* Login Button (desktop only) */}
-      <button className="hidden md:block bg-yellow-300 text-black px-5 py-2 rounded-full hover:bg-yellow-400 transition">
+      <button className="hidden md:block bg-white text-black px-5 py-2 rounded-full hover:bg-gray-400 transition">
         Log In
       </button>
 
@@ -61,7 +61,7 @@ const Navbar = () => {
               {item}
             </a>
           ))}
-          <button className="bg-white text-black px-5 py-2 rounded-full hover:bg-yellow-400 transition">
+          <button className="bg-white text-black px-5 py-2 rounded-full hover:bg-gray-400 transition">
             Log In
           </button>
         </div>
