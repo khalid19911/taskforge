@@ -13,7 +13,7 @@ const Navbar = () => {
       w-[90%] max-w-6xl py-3 px-6 rounded-full bg-black/60 backdrop-blur-md text-white z-50"
     >
       {/* Left: Logo */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 ">
         <img src={LogoImage} alt="Logo" className="w-14 h-14 object-contain" />
       </div>
 
@@ -39,9 +39,13 @@ const Navbar = () => {
       {/* Mobile Menu Icon */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden text-2xl focus:outline-none"
+        className="md:hidden text-2xl focus:outline-none bg-transparent "
       >
-        {isOpen ? <FaTimes /> : <FaBars />}
+        {isOpen ? (
+          <FaTimes className="bg-transparent" />
+        ) : (
+          <FaBars className="bg-transparent" />
+        )}
       </button>
 
       {/* Mobile Menu Dropdown */}
@@ -57,7 +61,7 @@ const Navbar = () => {
               {item}
             </a>
           ))}
-          <button className="bg-yellow-300 text-black px-5 py-2 rounded-full hover:bg-yellow-400 transition">
+          <button className="bg-white text-black px-5 py-2 rounded-full hover:bg-yellow-400 transition">
             Log In
           </button>
         </div>

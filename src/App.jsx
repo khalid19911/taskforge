@@ -21,41 +21,32 @@ function App() {
           alt="PainKulture Logo"
           className="md:w-120 h-auto object-contain"
         />
-        <h1
-          className="mt-[-50px] text-4xl text-white"
-          style={{ fontFamily: "'Montserrat'" }}
-        >
-          "Pain Shaped Me"
-        </h1>
       </div>
 
-      <div className="bg-black w-full flex flex-col md:flex-row items-center justify-center gap-0 p-1 md:p-24 text-white">
+      <div className="bg-black w-full flex flex-col md:flex-row items-center justify-center gap-10 md:gap-20 p-6 md:p-24 text-white">
         {/* About Text */}
         <div className="flex-1 md:flex-[0.4] flex flex-col justify-center text-center md:text-left">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-center">
-            About Us
-          </h1>
-          <p className="text-base md:text-lg text-gray-200 leading-relaxed text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">About Us</h1>
+          <p className="text-base md:text-lg text-gray-200 leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
             vehicula condimentum orci, at placerat lorem eleifend vitae. Aenean
             vel mattis neque, vitae porttitor arcu. Phasellus efficitur eros sed
             metus convallis, nec porttitor magna auctor. Suspendisse
             ullamcorper, sapien sit amet consectetur efficitur, mauris arcu
-            eleifend ex, ac hendrerit ante enim non eros. Class aptent taciti
-            sociosqu ad litora torquent per conubia nostra, per inceptos
-            himenaeos. Etiam consequat ante tortor, vel accumsan tellus lacinia
-            et. Pellentesque faucibus, est vel semper finibus, tellus diam
-            tincidunt eros, ut mollis massa justo et massa. Nunc sit amet ligula
-            vitae odio porttitor tristique elementum id lorem. Nam imperdiet
-            quam eu ultrices pulvinar.
+            eleifend ex, ac hendrerit ante enim non eros. Etiam consequat ante
+            tortor, vel accumsan tellus lacinia et. Pellentesque faucibus, est
+            vel semper finibus, tellus diam tincidunt eros, ut mollis massa
+            justo et massa. Nunc sit amet ligula vitae odio porttitor tristique
+            elementum id lorem.
           </p>
         </div>
+
         {/* About Image */}
         <div className="flex-1 md:flex-[0.6] flex justify-center">
           <img
             src={HeroImage}
             alt="Hero"
-            className="w-full max-w-md md:max-w-2xl h-auto object-contain rounded-lg "
+            className="w-full max-w-sm md:max-w-2xl h-auto object-contain rounded-lg"
           />
         </div>
       </div>
