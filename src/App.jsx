@@ -15,7 +15,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="bg-black w-full flex flex-col items-center justify-center text-center md:text-left md:p-24">
+      <div className="bg-black w-full flex flex-col items-center justify-center text-center md:text-left md:p-23">
         <img
           src={LogoImage}
           alt="PainKulture Logo"
