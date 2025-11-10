@@ -4,8 +4,9 @@ const ProductCard = ({ product }) => {
   return (
     <div
       className="bg-white rounded-lg shadow-lg overflow-hidden 
-                 w-full max-w-[180px] sm:max-w-[220px] md:max-w-xs 
-                 hover:scale-105 transition-transform duration-300 mx-auto"
+             w-full max-w-[180px] sm:max-w-[220px] md:max-w-xs  
+             transition-transform duration-300 hover:scale-105 hover:-translate-y-1 
+             hover:shadow-2xl mx-auto"
     >
       {/* Product Image */}
       <img
