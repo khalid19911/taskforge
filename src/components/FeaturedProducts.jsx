@@ -6,7 +6,6 @@ import FlightKultureHoodieBlack from "../assets/images/flight_kulture_hoodie_bla
 import FlightKultureJumperblue from "../assets/images/flight_kulture_hoodie_blue.jpg";
 import PainKultureShirtWhite from "../assets/images/pain_kulture_shirt_white.jpg";
 
-// Example featured products array
 const featuredProducts = [
   {
     id: 1,
@@ -14,6 +13,7 @@ const featuredProducts = [
     color: "Grey",
     price: 19.99,
     image: PainShapedMeShirtGrey,
+    inventory: { S: 5, M: 2, L: 1 },
   },
   {
     id: 2,
@@ -21,20 +21,23 @@ const featuredProducts = [
     color: "Black",
     price: 19.99,
     image: FlightKultureHoodieBlack,
+    inventory: { S: 3, M: 3, L: 1 },
   },
   {
     id: 3,
-    name: "Flight Kulture Jumper",
-    color: "Blue",
+    name: "Flight Kulture Hoodie",
+    color: "Black",
     price: 19.99,
-    image: FlightKultureJumperblue,
+    image: FlightKultureHoodieBlack,
+    inventory: { S: 3, M: 3, L: 1 },
   },
   {
     id: 4,
-    name: "Pain Kulture Shirt",
-    color: "White",
+    name: "Flight Kulture Hoodie",
+    color: "Black",
     price: 19.99,
-    image: PainKultureShirtWhite,
+    image: FlightKultureHoodieBlack,
+    inventory: { S: 3, M: 3, L: 1 },
   },
 ];
 

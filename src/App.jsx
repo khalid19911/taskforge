@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
 import LogoImage from "./assets/images/pain_kulture_logo.png";
+import ProductPage from "./components/ProductPage";
+import About from "./pages/About";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 
@@ -49,7 +51,9 @@ function App() {
         {/* Auth Pages */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/product" element={<ProductPage />} />
       </Routes>
     </Router>
   );
