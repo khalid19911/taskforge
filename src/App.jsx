@@ -3,6 +3,8 @@ import Navbar from "./components/Navbar";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
 import LogoImage from "./assets/images/pain_kulture_logo.png";
+import { HiOutlineArrowLongRight } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 
 // pages
 import Login from "./pages/Login";
@@ -24,13 +26,19 @@ function App() {
                 <img
                   src={LogoImage}
                   alt="PainKulture Logo"
-                  className="md:w-120 h-auto object-contain"
+                  className="md:w-120 h-auto object-contain "
                 />
               </div>
 
-              <div className="bg-black w-full relative flex items-center justify-center text-center flex-col gap-10 p-10 text-white">
+              <div className="bg-black w-full relative flex items-center justify-center text-center flex-col text-white">
                 <h1 className="text-7xl">EXPLORE OUR COLLECTION</h1>
                 <FeaturedProducts />
+                <Link to="/shop">
+                  <button className="flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-semibold hover:bg-gray-200 transition">
+                    SHOP NOW
+                    <HiOutlineArrowLongRight className="text-xl" />
+                  </button>
+                </Link>
               </div>
 
               <Newsletter />

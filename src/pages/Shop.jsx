@@ -35,8 +35,11 @@ const featuredProducts = [
 ];
 const Shop = () => {
   return (
-    <div className="bg-black text-white py-16 px-4 sm:px-6 lg:px-10">
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mx-auto max-w-6xl">
+    <div className="bg-black text-white py-16 px-20 sm:px-6 lg:px-10">
+      <div
+        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 
+                      gap-6 max-w-6xl mx-auto mt-10 justify-items-center text-center"
+      >
         {featuredProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
