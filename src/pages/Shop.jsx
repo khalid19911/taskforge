@@ -45,7 +45,7 @@ const Shop = () => {
   return (
     <div className="bg-black text-white py-16 px-5">
       {/* Header */}
-      <div className="max-w-6xl mx-auto mb-12">
+      <div className="max-w-6xl mx-auto mb-12 mt-10">
         <h2 className="text-4xl md:text-5xl font-bold tracking-wide">
           PRODUCTS
         </h2>
