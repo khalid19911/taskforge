@@ -8,7 +8,7 @@ const ProductPage = () => {
   const [selectedSize, setSelectedSize] = useState("");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  const { addToCart } = useCart(); // 👈 use global cart
+  const { addToCart } = useCart();
 
   if (!product) return <p className="text-white">Product not found</p>;
 
@@ -21,7 +21,7 @@ const ProductPage = () => {
   const handleAddToCart = () => {
     if (!selectedSize) return;
     addToCart(product, selectedSize);
-    setDrawerOpen(true); // optionally auto-open cart drawer
+    setDrawerOpen(true);
   };
 
   return (

@@ -41,22 +41,28 @@ const featuredProducts = [
   },
 ];
 
-<div className="bg-black text-white py-16 px-5">
-  {/* Header */}
-  <div className="max-w-6xl mx-auto mb-12">
-    <h2 className="text-4xl md:text-5xl font-bold tracking-wide">PRODUCTS</h2>
-    <div className="w-24 h-1 bg-yellow-400 mt-2 rounded mx-auto md:mx-0"></div>
-  </div>
+const Shop = () => {
+  return (
+    <div className="bg-black text-white py-16 px-5">
+      {/* Header */}
+      <div className="max-w-6xl mx-auto mb-12">
+        <h2 className="text-4xl md:text-5xl font-bold tracking-wide">
+          PRODUCTS
+        </h2>
+        <div className="w-24 h-1 bg-yellow-400 mt-2 rounded mx-auto md:mx-0"></div>
+      </div>
 
-  {/* Product Grid */}
-  <div
-    className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
+      {/* Product Grid */}
+      <div
+        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
            gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto"
-  >
-    {featuredProducts.map((product) => (
-      <ProductCard key={product.id} product={product} />
-    ))}
-  </div>
-</div>;
+      >
+        {featuredProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default Shop;
