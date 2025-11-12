@@ -45,11 +45,11 @@ const Shop = () => {
   return (
     <div className="bg-black text-white py-16 px-5">
       {/* Header */}
-      <div className="max-w-6xl mx-auto mb-12 mt-10">
-        <h2 className="text-4xl md:text-5xl font-bold tracking-wide">
+      <div className="max-w-6xl mx-auto mb-12 mt-10 px-5">
+        <h2 className="text-4xl md:text-5xl font-bold tracking-wide text-center md:text-left">
           PRODUCTS
         </h2>
-        <div className="w-24 h-1 bg-yellow-400 mt-2 rounded mx-auto md:mx-0"></div>
+        <div className="w-24 h-1 bg-yellow-400 mt-2 rounded mx-auto"></div>
       </div>
 
       {/* Product Grid */}
