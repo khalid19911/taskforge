@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import FeaturedProducts from "./components/FeaturedProducts";
 import Newsletter from "./components/Newsletter";
 import LogoImage from "./assets/images/pain_kulture_logo.png";
-import ProductPage from "./components/ProductPage";
+import ProductPage from "./pages/ProductPage";
 import About from "./pages/About";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
