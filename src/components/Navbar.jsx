@@ -5,7 +5,10 @@ import { IoPersonOutline } from "react-icons/io5";
 import LogoImage from "../assets/images/pain_kulture_logo.png";
 import { Link } from "react-router-dom";
 import CartDrawer from "./CartDrawer";
-import { useCart } from "../context/CartContext"; // 👈 use cart context
+import { useCart } from "../context/CartContext";
+
+import { UserAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const listItems = [
   { name: "Home", path: "/" },
@@ -16,11 +19,23 @@ const listItems = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { cartItems } = useCart();
 
-  const { cartItems } = useCart(); // 👈 get current cart items
+  const { session, signOut } = UserAuth();
+  const navigate = useNavigate();
 
-  // Total quantity (optional: sum of quantities in cart)
   const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+  const handleSignOut = async (e) => {
+    e.preventDefault();
+    try {
+      await signOut();
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <nav className="fixed flex items-center justify-between py-3 px-6 bg-black/20 text-white z-50 w-full">
       {/* Left: Logo */}
@@ -56,10 +71,19 @@ const Navbar = () => {
             </span>
           )}
         </button>
-
-        <Link to="/login" className="hover:text-yellow-300 transition">
-          <IoPersonOutline size={25} />
-        </Link>
+        {!session && (
+          <Link to="/login" className="hover:text-yellow-300 transition">
+            <IoPersonOutline size={25} />
+          </Link>
+        )}
+        {session && (
+          <button
+            className="bg-white text-black px-5 py-2 rounded-full hover:bg-gray-400 transition"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
+        )}
       </div>
       {/* Mobile: Bag + Menu */}
       <div className="flex items-center gap-4 md:hidden relative">
@@ -93,13 +117,24 @@ const Navbar = () => {
             </Link>
           ))}
 
-          <Link
-            to="/login"
-            className="bg-white text-black px-5 py-2 rounded-full hover:bg-gray-400 transition"
-            onClick={() => setIsOpen(false)}
-          >
-            Log In
-          </Link>
+          {!session && (
+            <Link
+              to="/login"
+              className="bg-white text-black px-5 py-2 rounded-full hover:bg-gray-400 transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Log In
+            </Link>
+          )}
+
+          {session && (
+            <button
+              className="bg-white text-black px-5 py-2 rounded-full hover:bg-gray-400 transition"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </button>
+          )}
         </div>
       )}
       {/* 🛒 Cart Drawer */}

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Newsletter from "../components/Newsletter";
 import Logo from "../assets/images/pain_kulture_logo.png";
@@ -6,59 +6,53 @@ import { MdAlternateEmail } from "react-icons/md";
 import { FaFingerprint, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 
+import { UserAuth } from "../context/AuthContext";
+
 const Register = () => {
   const [email, setEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const HandleRegister = () => {
-    // Check all fields filled
-    if (!email || !confirmEmail || !password || !confirmPassword) {
-      alert("Please fill in all fields.");
-      return;
+  const [loading, setLoading] = useState("");
+  const [error, setError] = useState("");
+
+  const { session, signUpNewUser } = UserAuth();
+  const navigate = useNavigate();
+  console.log("Here ", session);
+
+  const HandleRegister = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    // VALIDATION
+    if (!email || !confirmEmail || !password || !confirmPassword)
+      return alert("Please fill in all fields.");
+
+    if (email !== confirmEmail) return alert("Emails do not match.");
+
+    if (password !== confirmPassword) return alert("Passwords do not match.");
+
+    try {
+      const { success, error } = await signUpNewUser(email, password);
+
+      if (error) {
+        setError(error.message);
+        return;
+      }
+
+      if (success) {
+        alert("Account created. Check your email to verify your account.");
+        navigate("/login");
+      }
+    } catch (err) {
+      console.log(err);
+      setError("Unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
-
-    // Email match
-    if (email !== confirmEmail) {
-      alert("Email and Confirm Email do not match.");
-      return;
-    }
-
-    // Password match
-    if (password !== confirmPassword) {
-      alert("Password and Confirm Password do not match.");
-      return;
-    }
-
-    // Email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    // Password strength (Supabase)
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
-    if (!passwordRegex.test(password)) {
-      alert(
-        "Password must be at least 6 characters, include one uppercase letter, one number, and one special character."
-      );
-      return;
-    }
-
-    alert("Account created successfully!");
-    console.log("Email: " + email);
-    console.log("Confirmed Email: " + confirmEmail);
-
-    console.log("Password: " + password);
-    console.log("Confirmed Password: " + confirmPassword);
-
-    setEmail("");
-    setConfirmEmail("");
-    setPassword("");
-    setConfirmPassword("");
+    console.log("Here ", session);
   };
 
   return (

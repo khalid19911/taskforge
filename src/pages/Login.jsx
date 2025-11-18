@@ -5,6 +5,8 @@ import Logo from "../assets/images/pain_kulture_logo.png";
 import { MdAlternateEmail } from "react-icons/md";
 import { FaFingerprint, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserAuth } from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,7 +15,14 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
-  const HandleLogin = () => {
+  const [loading, setLoading] = useState("");
+  const [error, setError] = useState("");
+
+  const { session, signInUser } = UserAuth();
+  const navigate = useNavigate();
+  console.log("Here ", session);
+
+  const HandleLogin = async (e) => {
     if (!email || !password) {
       alert("Fill in all the fields!");
       return;
@@ -24,9 +33,17 @@ const Login = () => {
       alert("Please enter a valid email address.");
       return;
     }
-    setEmail("");
-    setPassword("");
-    alert("Account created!");
+    setLoading(true);
+    try {
+      const result = await signInUser(email, password);
+      if (result.success) {
+        navigate("/shop");
+      }
+    } catch (err) {
+      setError("an error has occured");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -90,6 +107,7 @@ const Login = () => {
           className="w-full p-2 bg-blue-500 rounded-xl mt-3 hover:to-blue-600
         text-sm md:text-base"
           onClick={HandleLogin}
+          disabled={loading}
         >
           Login
         </button>

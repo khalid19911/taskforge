@@ -1,47 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
-
-import PainShapedMeShirtGrey from "../assets/images/pain_shaped_me_grey.jpg";
-import FlightKultureHoodieBlack from "../assets/images/flight_kulture_hoodie_black.jpg";
-import FlightKultureJumperBlue from "../assets/images/flight_kulture_hoodie_blue.jpg";
-import PainKultureShirtWhite from "../assets/images/pain_kulture_shirt_white.jpg";
-
-const featuredProducts = [
-  {
-    id: 1,
-    name: "Pain Shaped Me Shirt",
-    color: "Grey",
-    price: 19.99,
-    image: PainShapedMeShirtGrey,
-    inventory: { S: 5, M: 2, L: 1 },
-  },
-  {
-    id: 2,
-    name: "Flight Kulture Hoodie",
-    color: "Black",
-    price: 19.99,
-    image: FlightKultureHoodieBlack,
-    inventory: { S: 3, M: 3, L: 1 },
-  },
-  {
-    id: 3,
-    name: "Flight Kulture Jumper",
-    color: "Blue",
-    price: 19.99,
-    image: FlightKultureJumperBlue,
-    inventory: { S: 2, M: 1, L: 0 },
-  },
-  {
-    id: 4,
-    name: "Pain Kulture Shirt",
-    color: "White",
-    price: 19.99,
-    image: PainKultureShirtWhite,
-    inventory: { S: 4, M: 2, L: 2 },
-  },
-];
+import { supabase } from "../../supabaseClient";
 
 const Shop = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchVariants = async () => {
+      setLoading(true);
+
+      // Fetch all variants with product info and images
+      const { data, error } = await supabase.from("variants").select(`
+        id,
+        product_id,
+        color,
+        size,
+        stock,
+        price,
+        products (
+          name,
+          product_images (
+            image_url,
+            color
+          )
+        )
+      `);
+
+      if (error) {
+        console.error("Error fetching variants:", error);
+        setLoading(false);
+        return;
+      }
+
+      // Group by product_id + color
+      const grouped = data.reduce((acc, variant) => {
+        const key = `${variant.product_id}-${variant.color}`;
+        if (!acc[key]) {
+          acc[key] = {
+            id: variant.id, // pick first variant for routing
+            product_id: variant.product_id,
+            name: variant.products.name,
+            color: variant.color,
+            price: variant.price,
+            images: variant.products.product_images
+              .filter((img) => img.color === variant.color)
+              .map((img) => img.image_url),
+            inventory: {},
+          };
+        }
+        acc[key].inventory[variant.size] = variant.stock;
+        return acc;
+      }, {});
+
+      setProducts(Object.values(grouped));
+      setLoading(false);
+    };
+
+    fetchVariants();
+  }, []);
+
+  if (loading)
+    return <p className="text-white text-center mt-20">Loading...</p>;
+
   return (
     <div className="bg-black text-white py-16 px-5">
       {/* Header */}
@@ -53,11 +74,8 @@ const Shop = () => {
       </div>
 
       {/* Product Grid */}
-      <div
-        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4
-           gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto"
-      >
-        {featuredProducts.map((product) => (
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
+        {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

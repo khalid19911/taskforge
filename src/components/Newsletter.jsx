@@ -4,14 +4,7 @@ import { MdEmail } from "react-icons/md";
 import LogoImage from "../assets/images/pain_kulture_logo.png";
 const Newsletter = () => {
   return (
-    <div className="bg-black w-full py-10 px-10 flex flex-col items-center justify-center text-white gap-4">
-      {/* Logo */}
-      <img
-        src={LogoImage}
-        alt="PainKulture Logo"
-        className="w-14 h-14 object-contain"
-      />
-
+    <div className="bg-black w-full py-10 px-10 flex flex-row items-center justify-center mt-10 text-white gap-4">
       {/* Social Icons */}
       <div className="flex gap-6 text-2xl">
         <a

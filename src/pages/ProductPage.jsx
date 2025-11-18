@@ -6,39 +6,59 @@ const ProductPage = () => {
   const location = useLocation();
   const { product } = location.state || {};
   const [selectedSize, setSelectedSize] = useState("");
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { addToCart } = useCart();
 
   if (!product) return <p className="text-white">Product not found</p>;
 
   const sizes = product.inventory ? Object.keys(product.inventory) : [];
+  const mainImage = product.images?.[currentImageIndex] || product.image;
 
-  const handleSizeSelect = (size) => {
-    setSelectedSize(size);
-  };
-
+  const handleSizeSelect = (size) => setSelectedSize(size);
   const handleAddToCart = () => {
     if (!selectedSize) return;
     addToCart(product, selectedSize);
-    setDrawerOpen(true);
   };
 
   return (
     <div className="bg-black text-white min-h-screen flex flex-col items-center justify-center px-4 py-6 sm:py-10">
       <div className="max-w-6xl w-full flex flex-col md:flex-row gap-8 items-center md:items-start">
-        {/* Product Image */}
-        <div className="flex-1 flex justify-center">
+        {/* Product Images */}
+        <div className="flex-1 flex flex-col items-center">
           <img
-            src={product.image}
-            alt={product.name}
+            src={mainImage}
+            alt={`${product.name} - ${product.color}`}
             className="w-64 sm:w-72 md:w-[400px] lg:w-[500px] object-contain rounded-lg shadow-lg"
           />
+          {product.images && product.images.length > 1 && (
+            <div className="flex gap-2 mt-3">
+              {product.images.map((img, idx) => (
+                <button
+                  key={idx}
+                  className={`w-12 h-12 border rounded overflow-hidden ${
+                    idx === currentImageIndex
+                      ? "border-yellow-400"
+                      : "border-gray-700"
+                  }`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setCurrentImageIndex(idx);
+                  }}
+                >
+                  <img
+                    src={img}
+                    alt="thumbnail"
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Product Details */}
         <div className="flex-1 flex flex-col gap-2 items-center md:items-start text-center md:text-left mt-4 md:mt-0">
-          {/* Back Button */}
           <Link
             to="/shop"
             className="text-sm sm:text-base mb-3 text-gray-400 hover:text-yellow-300 transition"
@@ -46,7 +66,6 @@ const ProductPage = () => {
             ← Back to Shop
           </Link>
 
-          {/* Product Info */}
           <h1 className="text-xl sm:text-2xl md:text-3xl font-bold break-words">
             {product.name}
           </h1>
@@ -90,7 +109,7 @@ const ProductPage = () => {
             Add to Cart
           </button>
 
-          {/* Inventory info */}
+          {/* Stock Info */}
           {selectedSize && (
             <p className="text-xs sm:text-sm text-gray-400 mt-2">
               {product.inventory[selectedSize]} left in stock

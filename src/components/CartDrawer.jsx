@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext"; // import
+import { useCart } from "../context/CartContext";
 
 const CartDrawer = ({ onClose }) => {
-  const { cartItems, removeFromCart, updateQuantity } = useCart(); // use global state
+  const { cartItems, removeFromCart, updateQuantity } = useCart();
 
   const subtotal = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
@@ -32,9 +32,9 @@ const CartDrawer = ({ onClose }) => {
               className="flex items-center gap-3 bg-gray-900 rounded-lg p-3 relative"
             >
               <img
-                src={item.image}
+                src={item.image || item.images?.[0]}
                 alt={item.name}
-                className="w-16 h-16 object-cover rounded"
+                className="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded"
               />
 
               <div className="flex-1">

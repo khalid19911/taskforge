@@ -6,23 +6,31 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
-
   // Adds item to cart.
   const addToCart = (product, size) => {
     setCartItems((prev) => {
-      const existing = prev.find(
-        (item) => item.id === product.id && item.size === size
-      );
+      // Generate a unique key based on ID + size (avoids collisions)
+      const key = `${product.id}-${size}`;
+
+      const existing = prev.find((item) => item.key === key);
+
       if (existing) {
-        // Increases quantity of item.
+        // Increase quantity if this exact item already exists
         return prev.map((item) =>
-          item.id === product.id && item.size === size
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
+          item.key === key ? { ...item, quantity: item.quantity + 1 } : item
         );
-      } else {
-        return [...prev, { ...product, size, quantity: 1 }];
       }
+
+      // Otherwise add new item
+      return [
+        ...prev,
+        {
+          ...product,
+          key,
+          size,
+          quantity: 1,
+        },
+      ];
     });
   };
 

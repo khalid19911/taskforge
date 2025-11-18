@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product" element={<ProductPage />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </Router>
   );
